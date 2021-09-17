@@ -1,5 +1,8 @@
 import React from "react";
-import {Box, Grid, makeStyles, Typography} from "@material-ui/core";
+import {Box, CircularProgress, Grid, makeStyles, Typography} from "@material-ui/core";
+import { DataGrid } from '@mui/x-data-grid';
+import DataTable from "../components/HospitalGrid";
+
 
 const useStyles = makeStyles((Theme) => ({
     root:{
@@ -19,9 +22,11 @@ const useStyles = makeStyles((Theme) => ({
 }))
 
 
+
 const HomePage = () => {
 
     const classes = useStyles()
+    const [isLoading, setIsLoading] = React.useState(true);
 
     return (
         <div className={classes.root}>
@@ -36,12 +41,16 @@ const HomePage = () => {
                         Find The Right Hospital For You.
                     </Typography>
                 </Grid>
-                <Grid item xs={2} style={{background: "yellow"}}>
+                <Grid item xs={3} style={{background: "yellow"}}>
 d
                 </Grid>
-                <Grid item xs={10} style={{background: "brown"}}>
+                <Grid item xs={9} style={{background: "brown"}}>
                     <Box style={{height: '750px'}}>
-f
+f                       <div style={{ height: 400, width: '100%' }}>
+                        <Box style={{height: '800px'}}>
+                            {isLoading ? <CircularProgress/> : DataTable(data.users)}
+                        </Box>
+                    </div>
                     </Box>
                 </Grid>
             </Grid>
