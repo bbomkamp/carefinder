@@ -1,7 +1,6 @@
 import React from "react";
-import {Box, CircularProgress, Grid, makeStyles, Typography} from "@material-ui/core";
-import { DataGrid } from '@mui/x-data-grid';
-import DataTable from "../components/HospitalGrid";
+import {Box, Grid, makeStyles, Typography} from "@material-ui/core";
+
 
 
 const useStyles = makeStyles((Theme) => ({
@@ -21,12 +20,19 @@ const useStyles = makeStyles((Theme) => ({
 
 }))
 
+fetch('http://www.knautzfamilywi.com/CareFinder-1.0.0/api/key/get').then(function (response){
+    return response.json();
+}).then(function (data){
+    console.log(data);
+}).catch(function (){
+    console.log("Somethings Wrong")
+})
 
 
 const HomePage = () => {
 
     const classes = useStyles()
-    const [isLoading, setIsLoading] = React.useState(true);
+
 
     return (
         <div className={classes.root}>
@@ -44,11 +50,11 @@ const HomePage = () => {
                 <Grid item xs={3} style={{background: "yellow"}}>
 d
                 </Grid>
-                <Grid item xs={9} style={{background: "brown"}}>
+                <Grid item xs={9} style={{background: "blue"}}>
                     <Box style={{height: '750px'}}>
 f                       <div style={{ height: 400, width: '100%' }}>
                         <Box style={{height: '800px'}}>
-                            {isLoading ? <CircularProgress/> : DataTable(data.users)}
+
                         </Box>
                     </div>
                     </Box>
