@@ -1,8 +1,9 @@
 import React from "react";
 import {DataGrid} from '@material-ui/data-grid';
+import {Grid} from "@material-ui/core";
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', width: 100},
     {
         field: 'hospitalName',
         headerName: 'Name',
@@ -26,48 +27,115 @@ const columns = [
     {
         field: 'zipCode',
         headerName: 'Zip Code',
-        type: 'number',
-        width: 110,
+        width: 135,
     },
     {
         field: 'countyName',
         headerName: 'County',
-        width: 110,
+        width: 140,
     },
     {
         field: 'phone',
         headerName: 'Phone',
         type: 'number',
-        width: 110,
-        editable: true,
+        width: 140,
     },
     {
         field: 'type',
         headerName: 'Type',
         width: 110,
-        editable: true,
     },
     {
         field: 'ownership',
         headerName: 'Ownership',
-        type: 'number',
-        width: 110,
-        editable: true,
+        width: 150,
     }
 ];
-const DataTable = (props) => {
+const rows = [
+    {
+        id: 1, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 2, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 3, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 4, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 5, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 6, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 7, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 8, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+    {
+        id: 9, hospitalName: "All Saints",
+        address: "1234 Spring St.",
+        city: "Racine", state: "WI",
+        zipCode: "53402", countyName: "Racine",
+        phone: "2621234567", type: "Type",
+        ownership:"ownership"
+    },
+]
+
+const DataTable = () => {
 
     return (
-        <div style={{height: '100%', width: '100%', backgroundColor: "#303030", fontSize: 15}}>
+        <Grid container>
             <DataGrid
-
-                rows={props}
                 columns={columns}
-                //pageSize={5}
-                //checkboxSelection
-                disableSelectionOnClick
-            />
-        </div>
+                rows={rows}
+                style={{height: 800}}
+        />
+        </Grid>
 
     );
 

@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.3",
-    "@material-ui/data-grid": "^4.0.0-alpha.37"
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
+    "@mui/material": "^5.0.0"
   }
 }
