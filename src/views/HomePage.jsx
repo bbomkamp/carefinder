@@ -252,7 +252,6 @@ const HomePage = () => {
                                     columns={columns}
                                     rows={rows}
                                     style={{height: 600}}
-
                                 />
                             </Grid>
                         </Paper>
