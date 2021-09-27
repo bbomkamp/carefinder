@@ -11,9 +11,6 @@ import {
 import getHospitals from "../helpers/getHospitals";
 import SearchBar from "material-ui-search-bar";
 import {DataGrid} from "@material-ui/data-grid";
-import {blue} from "@mui/material/colors";
-import styled from "@emotion/styled";
-import shadows from "@mui/material/styles/shadows";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100},
