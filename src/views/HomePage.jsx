@@ -11,6 +11,7 @@ import {
 import getHospitals from "../helpers/getHospitals";
 import SearchBar from "material-ui-search-bar";
 import {DataGrid} from "@material-ui/data-grid";
+import axios from "axios";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100},
@@ -19,47 +20,47 @@ const columns = [
         headerName: 'Name',
         width: 300,
     },
-    {
-        field: 'address',
-        headerName: 'Address',
-        width: 250,
-    },
-    {
-        field: 'city',
-        headerName: 'City',
-        width: 110,
-    },
-    {
-        field: 'state',
-        headerName: 'State',
-        width: 110,
-    },
-    {
-        field: 'zipCode',
-        headerName: 'Zip Code',
-        width: 135,
-    },
-    {
-        field: 'countyName',
-        headerName: 'County',
-        width: 140,
-    },
-    {
-        field: 'phone',
-        headerName: 'Phone',
-        type: 'number',
-        width: 140,
-    },
-    {
-        field: 'type',
-        headerName: 'Type',
-        width: 110,
-    },
-    {
-        field: 'ownership',
-        headerName: 'Ownership',
-        width: 150,
-    }
+    // {
+    //     field: 'address',
+    //     headerName: 'Address',
+    //     width: 250,
+    // },
+    // {
+    //     field: 'city',
+    //     headerName: 'City',
+    //     width: 110,
+    // },
+    // {
+    //     field: 'state',
+    //     headerName: 'State',
+    //     width: 110,
+    // },
+    // {
+    //     field: 'zipCode',
+    //     headerName: 'Zip Code',
+    //     width: 135,
+    // },
+    // {
+    //     field: 'countyName',
+    //     headerName: 'County',
+    //     width: 140,
+    // },
+    // {
+    //     field: 'phone',
+    //     headerName: 'Phone',
+    //     type: 'number',
+    //     width: 140,
+    // },
+    // {
+    //     field: 'type',
+    //     headerName: 'Type',
+    //     width: 110,
+    // },
+    // {
+    //     field: 'ownership',
+    //     headerName: 'Ownership',
+    //     width: 150,
+    // }
 ];
 const rows = [
     {
@@ -168,34 +169,24 @@ const HomePage = () => {
 
     // States
     const [category, setCategory] = useState('name')
-    const [theRows, setTheRows] = useState(rows)
-    const [searched, setSearched] = useState('')
-
-    const requestSearch = (searchedVal) => {
-        const filterRows = rows.filter((rows) =>{
-            return rows.name.toLowerCase().includes(searchedVal.toLowerCase());
-        })
-        setTheRows(filterRows)
-    };
-    const cancelSearch = () => {
-        let setSearched = "";
-        requestSearch(searched)
-    };
-
+    const [hospitals, setHospitals] = useState([]);
     // Vars
     const classes = useStyles()
-    let hospitalsAll =[]
 
     // useEffect
-    useEffect(()=>{
-         hospitalsAll = getHospitals
+    useEffect(() => {
+
+        getHospitals(function(hospitals) {
+            setHospitals(hospitals)
+        })
+
     }, [])
 
     return (
         <div className={classes.root}>
             <Grid container>
-                <Grid item xs={12}>
 
+                <Grid item xs={12}>
                     <Typography className={classes.header}>
                         CareFinder
                     </Typography>
@@ -210,9 +201,9 @@ const HomePage = () => {
                 <Grid item xs={12} style={{padding: 5}}>
                     <Paper>
                     <SearchBar>
-                        value= {searched}
-                        onChange={(searchVal) => requestSearch(searchVal)}
-                        onCancelSearch= {()=> cancelSearch()}
+                        {/*value= {searched}*/}
+                        {/*onChange={(searchVal) => requestSearch(searchVal)}*/}
+                        {/*onCancelSearch= {()=> cancelSearch()}*/}
                     </SearchBar>
                     </Paper>
                 </Grid>
@@ -232,6 +223,7 @@ const HomePage = () => {
                                 <FormControlLabel value="address" control={<Radio />} label="Address" />
                                 <FormControlLabel value="city" control={<Radio />} label="City" />
                                 <FormControlLabel value="state" control={<Radio />} label="State" />
+                                <FormControlLabel value="cityAndState" control={<Radio />} label="City and State" />
                                 <FormControlLabel value="zipCode" control={<Radio />} label="Zip Code" />
                                 <FormControlLabel value="county" control={<Radio />} label="County" />
                                 <FormControlLabel value="phone" control={<Radio />} label="Phone Number" />
@@ -245,9 +237,12 @@ const HomePage = () => {
                     <Box>
                         <Paper>
                             <Grid container>
+
                                 <DataGrid
+
                                     columns={columns}
-                                    rows={rows}
+                                    rows={hospitals}
+
                                     style={{height: 600}}
                                 />
                             </Grid>
