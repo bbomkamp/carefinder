@@ -3,15 +3,13 @@ import {
     Box,
     FormControl, FormControlLabel,
     FormLabel,
-    Grid,
+    Grid, LinearProgress,
     makeStyles, Paper, Radio,
     RadioGroup,
     Typography
 } from "@material-ui/core";
 import getHospitals from "../helpers/getHospitals";
-import SearchBar from "material-ui-search-bar";
 import {DataGrid} from "@material-ui/data-grid";
-import axios from "axios";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100},
@@ -20,36 +18,38 @@ const columns = [
         headerName: 'Name',
         width: 300,
     },
-    // {
-    //     field: 'address',
-    //     headerName: 'Address',
-    //     width: 250,
-    // },
-    // {
-    //     field: 'city',
-    //     headerName: 'City',
-    //     width: 110,
-    // },
-    // {
-    //     field: 'state',
-    //     headerName: 'State',
-    //     width: 110,
-    // },
+    {
+        field: 'address',
+        headerName: 'Address',
+        width: 250,
+    },
+    {
+        field: 'state',
+        headerName: 'State',
+        width: 110,
+    },
+
+    {
+        field: 'city',
+        headerName: 'City',
+        width: 110,
+    },
+    {
+        field: 'county',
+        headerName: 'County',
+        width: 140,
+    },
+
+    {
+        field: 'phoneNumber',
+        headerName: 'Phone',
+        width: 120,
+    },
+
     // {
     //     field: 'zipCode',
     //     headerName: 'Zip Code',
     //     width: 135,
-    // },
-    // {
-    //     field: 'countyName',
-    //     headerName: 'County',
-    //     width: 140,
-    // },
-    // {
-    //     field: 'phone',
-    //     headerName: 'Phone',
-    //     type: 'number',
-    //     width: 140,
     // },
     // {
     //     field: 'type',
@@ -62,81 +62,6 @@ const columns = [
     //     width: 150,
     // }
 ];
-const rows = [
-    {
-        id: 1, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-    {
-        id: 2, hospitalName: "MARSHALL MEDICAL CENTER SOUTH",
-        address: "2505 U S HIGHWAY 431 NORTH",
-        city: "BOAZ", state: "AL",
-        zipCode: "35957", countyName: "MARSHALL",
-        phone: "2565938310", type: "Acute Care Hospitals",
-        ownership:"Government"
-    },
-    {
-        id: 3, hospitalName: "SOUTHEAST ALABAMA MEDICAL CENTER",
-        address: "1108 ROSS CLARK CIRCLE",
-        city: "DOTHAN", state: "AL",
-        zipCode: "36301", countyName: "HOUSTON",
-        phone: "3347938701", type: "Acute Care Hospitals",
-        ownership:"Government"
-    },
-    {
-        id: 4, hospitalName: "ELIZA COFFEE MEMORIAL HOSPITAL",
-        address: "205 MARENGO STREET",
-        city: "FLORENCE", state: "AL",
-        zipCode: "35631", countyName: "LAUDERDALE",
-        phone: "2567688400", type: "Acute Care Hospitals",
-        ownership:"Government"
-    },
-    {
-        id: 5, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-    {
-        id: 6, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-    {
-        id: 7, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-    {
-        id: 8, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-    {
-        id: 9, hospitalName: "All Saints",
-        address: "1234 Spring St.",
-        city: "Racine", state: "WI",
-        zipCode: "53402", countyName: "Racine",
-        phone: "2621234567", type: "Type",
-        ownership:"ownership"
-    },
-]
-
 const useStyles = makeStyles((Theme) => ({
     root:{
         display: "flex",
@@ -163,25 +88,30 @@ const useStyles = makeStyles((Theme) => ({
 
 }))
 
-
-
 const HomePage = () => {
 
-    // States
-    const [category, setCategory] = useState('name')
+
+    const [category, setCategory] = useState('all')
     const [hospitals, setHospitals] = useState([]);
-    // Vars
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [input, setInput] = useState('');
+
     const classes = useStyles()
 
-    // useEffect
     useEffect(() => {
 
-        getHospitals(function(hospitals) {
-            setHospitals(hospitals)
+        getHospitals(input, category, function(hospitals){
+
+            if (isLoading) {
+                setHospitals(hospitals)
+            }
+            setIsLoading(false);
         })
+    }, [category, input, isLoading])
 
-    }, [])
-
+    const handleSubmit = () => {
+       getHospitals(input,category)
+    }
     return (
         <div className={classes.root}>
             <Grid container>
@@ -200,11 +130,18 @@ const HomePage = () => {
 
                 <Grid item xs={12} style={{padding: 5}}>
                     <Paper>
-                    <SearchBar>
-                        {/*value= {searched}*/}
-                        {/*onChange={(searchVal) => requestSearch(searchVal)}*/}
-                        {/*onCancelSearch= {()=> cancelSearch()}*/}
-                    </SearchBar>
+                        <form onSubmit={handleSubmit}>
+                            <label>
+                                <input
+                                    type="text"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                />
+                            </label>
+                            <input type="submit" />
+                        </form>
+
+                        {isLoading && <LinearProgress />}
                     </Paper>
                 </Grid>
 
@@ -217,17 +154,13 @@ const HomePage = () => {
                                 aria-label="gender"
                                 defaultValue="female"
                                 name="radio-buttons-group"
-                                value={category}  onChange={(e) => setCategory(e.target.value)}
-                            >
+                                value={category}  onChange={(e) => setCategory(e.target.value)}>
                                 <FormControlLabel value="name" control={<Radio  />} label="Name" />
-                                <FormControlLabel value="address" control={<Radio />} label="Address" />
+                                <FormControlLabel value="providerId" control={<Radio />} label="Provider ID" />
                                 <FormControlLabel value="city" control={<Radio />} label="City" />
                                 <FormControlLabel value="state" control={<Radio />} label="State" />
-                                <FormControlLabel value="cityAndState" control={<Radio />} label="City and State" />
-                                <FormControlLabel value="zipCode" control={<Radio />} label="Zip Code" />
                                 <FormControlLabel value="county" control={<Radio />} label="County" />
-                                <FormControlLabel value="phone" control={<Radio />} label="Phone Number" />
-                                <FormControlLabel value="type" control={<Radio />} label="Type" />
+                                <FormControlLabel value="cityAndState" control={<Radio />} label="City and State" />
                             </RadioGroup>
                         </FormControl>
 
@@ -239,10 +172,8 @@ const HomePage = () => {
                             <Grid container>
 
                                 <DataGrid
-
                                     columns={columns}
                                     rows={hospitals}
-
                                     style={{height: 600}}
                                 />
                             </Grid>
