@@ -152,8 +152,40 @@ const getHospitals = (input, category, callback) => {
             }).catch(err => {
             console.log("Error getting hospitals " + err)
         })
+    } else if (category === "cityAndState") {
+
+        let stringArray = input.split(/\s+/);
+        stringArray = stringArray.map(function(x){ return x.toUpperCase(); })
+
+
+        axios.get(urlSlug,
+            { params: {city: stringArray[0], state: stringArray[1]}})
+            .then(res => {
+                console.log(stringArray[0])
+                console.log(stringArray[1])
+                const hospitals = res.data
+                let returnHospitals = []
+                console.log("axios call for city and state")
+                hospitals.data.forEach((hospital) => {
+                    let cleanedHospital = {}
+                    cleanedHospital.hospitalName = hospital.name
+                    cleanedHospital.id = hospital.providerId
+                    cleanedHospital.address = hospital.address
+                    cleanedHospital.city = hospital.city
+                    cleanedHospital.state = hospital.state
+                    cleanedHospital.phoneNumber = hospital.phoneNumber
+                    cleanedHospital.zipCode = hospital.zipCode
+                    cleanedHospital.county = hospital.county
+                    returnHospitals.push(cleanedHospital);
+                })
+                 console.log(returnHospitals)
+                callback(returnHospitals)
+            }).catch(err => {
+            console.log("Error getting hospitals " + err)
+        })
     }
     console.log("Get Hospitals has been called.")
+
 }
 
 export default getHospitals;

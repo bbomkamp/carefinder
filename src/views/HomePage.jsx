@@ -92,7 +92,7 @@ const useStyles = makeStyles((Theme) => ({
 
 const HomePage = () => {
 
-    const [category, setCategory] = useState('')
+    const [category, setCategory] = useState('name')
     const [hospitals, setHospitals] = useState([]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [input, setInput] = useState('');
@@ -191,14 +191,15 @@ const HomePage = () => {
                                         Search
                                     </Button>
 
-                                    {isLoading && <LinearProgress />}
                                     </Grid>
                                     <Grid item style={{padding: 10, alignContent: 'center'}}>
                                         <Button variant="outlined" onClick={handleReset}>Show all Hospitals</Button>
                                     </Grid>
                 </Grid>
                             </Paper>
+                            {isLoading && <LinearProgress />}
                             <Grid container>
+
                                 <DataGrid
                                     columns={columns}
                                     rows={hospitals}
