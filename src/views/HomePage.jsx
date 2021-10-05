@@ -1,4 +1,6 @@
-import React, {useEffect, useState,} from "react";
+import React, {
+    // useEffect,
+    useState,} from "react";
 import {
     Box,
     FormControl, FormControlLabel,
@@ -6,7 +8,7 @@ import {
     Grid, LinearProgress,
     makeStyles, Paper, Radio,
     RadioGroup,
-    Typography
+    Typography, Button
 } from "@material-ui/core";
 import getHospitals from "../helpers/getHospitals";
 import {DataGrid} from "@material-ui/data-grid";
@@ -90,28 +92,43 @@ const useStyles = makeStyles((Theme) => ({
 
 const HomePage = () => {
 
-
-    const [category, setCategory] = useState('all')
+    const [category, setCategory] = useState('')
     const [hospitals, setHospitals] = useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(false);
     const [input, setInput] = useState('');
 
     const classes = useStyles()
 
-    useEffect(() => {
+    // useEffect(() => {
+    //
+    //     getHospitals(input, category, function(hospitals){
+    //
+    //         if (isLoading) {
+    //             setHospitals(hospitals)
+    //         }
+    //         setIsLoading(false);}
+    //     )},
+    //     [category, input]
+    // )
 
-        getHospitals(input, category, function(hospitals){
-
-            if (isLoading) {
-                setHospitals(hospitals)
-            }
-            setIsLoading(false);
-        })
-    }, [category, input, isLoading])
 
     const handleSubmit = () => {
-       getHospitals(input,category)
+        setIsLoading(true)
+        getHospitals(input, category, function(hospitals){
+            setHospitals(hospitals)
+            setIsLoading(false)
+        })
     }
+
+    const handleReset = () => {
+        setIsLoading(true)
+        getHospitals('', category, function(hospitals){
+            setHospitals(hospitals)
+            setIsLoading(false)
+            setInput('')
+        })
+    }
+
     return (
         <div className={classes.root}>
             <Grid container>
@@ -126,23 +143,6 @@ const HomePage = () => {
                     <Typography className={classes.slogan}>
                         Find The Right Hospital For You.
                     </Typography>
-                </Grid>
-
-                <Grid item xs={12} style={{padding: 5}}>
-                    <Paper>
-                        <form onSubmit={handleSubmit}>
-                            <label>
-                                <input
-                                    type="text"
-                                    value={input}
-                                    onChange={(e) => setInput(e.target.value)}
-                                />
-                            </label>
-                            <input type="submit" />
-                        </form>
-
-                        {isLoading && <LinearProgress />}
-                    </Paper>
                 </Grid>
 
                 <Grid item xs={2}  style={{padding: 10}}>
@@ -163,14 +163,42 @@ const HomePage = () => {
                                 <FormControlLabel value="cityAndState" control={<Radio />} label="City and State" />
                             </RadioGroup>
                         </FormControl>
-
                     </Grid>
                 </Grid>
                 <Grid item xs={10} style={{padding: 10}}>
                     <Box>
-                        <Paper>
-                            <Grid container>
+                        <Paper >
 
+                            <Paper>
+                                <Grid container direction={"row"}>
+                                    <Grid item xs={6}>
+                                        <form  style={{padding:10}}>
+                                            <label>
+                                                <input
+                                                    placeholder={"Enter your search here..."}
+                                                     style={{width: "100%", height: '25px'}}
+                                                     type="text"
+                                                     value= {input}
+                                                     onChange={(e) => setInput(e.target.value)}
+                                                  />
+                                            </label>
+                                         </form>
+                                    </Grid>
+                                    <Grid item xs={3} style={{padding:10}}>
+                                    <Button
+                                        style={{backgroundColor: 'lightblue'}}
+                                        onClick={handleSubmit}>
+                                        Search
+                                    </Button>
+
+                                    {isLoading && <LinearProgress />}
+                                    </Grid>
+                                    <Grid item style={{padding: 10, alignContent: 'center'}}>
+                                        <Button variant="outlined" onClick={handleReset}>Show all Hospitals</Button>
+                                    </Grid>
+                </Grid>
+                            </Paper>
+                            <Grid container>
                                 <DataGrid
                                     columns={columns}
                                     rows={hospitals}
