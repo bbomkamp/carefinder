@@ -64,6 +64,7 @@ const useStyles = makeStyles((Theme) => ({
 
     },
     slogan: {
+        borderRadius: 20,
         color: 'white',
         fontSize: 25,
         textAlign: "center",
@@ -152,7 +153,7 @@ const HomePage = () => {
                     </Grid>
 
                     <Grid item style={{padding: 10, alignContent: 'center'}}>
-                        <Button variant="outlined" onClick={handleReset}>Show all Hospitals</Button>
+                        <Button variant="outlined" style={{borderRadius: 20}} onClick={handleReset}>Show all Hospitals</Button>
                     </Grid>
                 </Grid>
 
@@ -161,12 +162,12 @@ const HomePage = () => {
                         <Paper>
                             <Paper>
                                 <Grid container direction={"row"}>
-                                    <Grid item xs={8} style={{backgroundColor: "lightgray", padding:5}}>
+                                    <Grid item xs={9} style={{backgroundColor: "lightgray", padding:5}}>
                                         <form style={{padding: 10}}>
                                             <label>
                                                 <input
-                                                    placeholder={"Enter your search here..."}
-                                                    style={{width: "100%", height: '25px'}}
+                                                    placeholder={" Enter your search here..."}
+                                                    style={{width: "100%", height: '25px', borderRadius: 20}}
                                                     type="text"
                                                     value={input}
                                                     onChange={(e) => setInput(e.target.value)}
@@ -176,17 +177,20 @@ const HomePage = () => {
                                         </form>
                                     </Grid>
 
-                                    <Grid item xs={2} style={{padding: 12,  backgroundColor: 'lightgray'}}>
+                                    <Grid item xs={1} style={{padding: 12,  backgroundColor: 'lightgray'}}>
                                         <Button
                                             variant="outlined"
-                                            style={{backgroundColor: 'lightblue'}}
+                                            style={{backgroundColor: 'lightblue', borderRadius: 20}}
                                             onClick={handleSubmit}>
                                             Search
                                         </Button>
                                     </Grid>
 
                                     <Grid item xs={2} style={{padding: 12, alignContent: 'center', backgroundColor: 'lightgray'}}>
-                                        <Button variant="outlined" onClick={handleClear}>Clear Results</Button>
+                                        <Button
+                                            variant="outlined"
+                                            style={{borderRadius: 20}}
+                                            onClick={handleClear}>Clear Results</Button>
                                     </Grid>
                                 </Grid>
                             </Paper>
