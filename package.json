@@ -50,6 +50,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.37",
     "@mui/material": "^5.0.0",
     "prop-types": "^15.7.2",
+    "react-animated-text": "^0.1.4",
     "react-router-dom": "^5.3.0"
   }
 }
