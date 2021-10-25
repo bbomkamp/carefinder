@@ -53,6 +53,7 @@ const columns = [
 
 // Style Formats
 const useStyles = makeStyles((Theme) => ({
+
     root: {
         display: "flex",
         background: "#d5dbe3"
@@ -76,8 +77,8 @@ const useStyles = makeStyles((Theme) => ({
         backgroundColor: "#d5dbe3"
     },
 
-
 }))
+
 
 const HomePage = () => {
 
@@ -89,6 +90,7 @@ const HomePage = () => {
 
     // Vars
     const classes = useStyles()
+
 
     // Methods
     const handleSubmit = () => {
@@ -124,6 +126,7 @@ const HomePage = () => {
                         CareFinder
                     </Typography>
                 </Grid>
+
 
                 <Grid item xs={12} style={{padding: 5}}>
                     <Typography className={classes.slogan}>

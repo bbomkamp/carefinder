@@ -37,8 +37,8 @@ const Login = () => {
     return(
         <div className={classes.root}>
             <Grid container>
-                <Grid item xs={12}>
 
+                <Grid item xs={12}>
                     <Typography className={classes.header}>
                         CareFinder
                     </Typography>
@@ -49,19 +49,20 @@ const Login = () => {
                         Find The Right Hospital For You.
                     </Typography>
                 </Grid>
-                <Grid item xs={12}>
 
+                <Grid item xs={4}>
+                    <Paper/>
+                </Grid>
 
-                <Paper>
-                    <Grid item justifyContent={"center"}>
-                        <LoginComponent />
-                    </Grid>
-                </Paper>
+                <Grid item xs={7}>
+                    <LoginComponent/>
+                </Grid>
+
+                <Grid item xs={1}>
+                    <Paper/>
+                </Grid>
+
             </Grid>
-            </Grid>
-
-
-
         </div>
     );
 }

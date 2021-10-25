@@ -212,8 +212,7 @@ const getHospitals = (input, category, callback) => {
         axios.get(urlSlug,
             {params: {city: stringArray[0], state: stringArray[1]}})
             .then(res => {
-                console.log(stringArray[0])
-                console.log(stringArray[1])
+
                 const hospitals = res.data
                 let returnHospitals = []
 

@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createTheme} from "@material-ui/core";
+import {ThemeProvider} from "@emotion/react";
+
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#016836',
+        },
+        secondary: {
+            main: '#016836',
+        },
+    }
+});
 
 ReactDOM.render(
+    <ThemeProvider theme={theme}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+    </ThemeProvider>,
   document.getElementById('root')
 );
 
