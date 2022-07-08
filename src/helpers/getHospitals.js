@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getHospitals = (input, category, callback) => {
 
-    const urlSlug = "http://mango.cs.uwp.edu:3000/api/v1/hospitals/"
+    const urlSlug = 'https://carefindermean.herokuapp.com/api/hospitals';
 
     // Initial load of hospitals
     if (category === "") {
@@ -12,8 +12,9 @@ const getHospitals = (input, category, callback) => {
             const hospitals = res.data
             let returnHospitals = []
 
+            console.log(hospitals)
             // Grab information needed to display in Grid from each hospital and return it.
-            hospitals.data.forEach((hospital) => {
+            hospitals.forEach((hospital) => {
                 let cleanedHospital = {}
                 cleanedHospital.hospitalName = hospital.name
                 cleanedHospital.id = hospital.providerId
@@ -39,9 +40,10 @@ const getHospitals = (input, category, callback) => {
             .then(res => {
                 const hospitals = res.data
                 let returnHospitals = []
+                console.log(hospitals)
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId
@@ -69,7 +71,7 @@ const getHospitals = (input, category, callback) => {
                 let returnHospitals = []
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId
@@ -97,7 +99,7 @@ const getHospitals = (input, category, callback) => {
                 let returnHospitals = []
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId
@@ -123,9 +125,10 @@ const getHospitals = (input, category, callback) => {
             .then(res => {
                 const hospitals = res.data
                 let returnHospitals = []
+                console.log(hospitals)
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId
@@ -151,7 +154,7 @@ const getHospitals = (input, category, callback) => {
             .then(res => {
                 const hospitals = res.data
                 let returnHospitals = []
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
 
                     // Grab information needed to display in Grid from each hospital and return it.
                     let cleanedHospital = {}
@@ -182,7 +185,7 @@ const getHospitals = (input, category, callback) => {
                 let returnHospitals = []
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId
@@ -217,7 +220,7 @@ const getHospitals = (input, category, callback) => {
                 let returnHospitals = []
 
                 // Grab information needed to display in Grid from each hospital and return it.
-                hospitals.data.forEach((hospital) => {
+                hospitals.forEach((hospital) => {
                     let cleanedHospital = {}
                     cleanedHospital.hospitalName = hospital.name
                     cleanedHospital.id = hospital.providerId

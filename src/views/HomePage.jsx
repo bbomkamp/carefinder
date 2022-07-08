@@ -104,9 +104,8 @@ const HomePage = () => {
 
     const handleReset = () => {
         setIsLoading(true)
-        getHospitals('', category, function (hospitals) {
+        getHospitals('', '', function (hospitals) {
             setHospitals(hospitals)
-            setIsLoading(false)
             setInput('')
         })
     }
@@ -201,8 +200,10 @@ const HomePage = () => {
 
                             <Grid container>
                                 <DataGrid
+                                    
                                     columns={columns}
                                     rows={hospitals}
+                                    
                                     style={{height: 600}}
                                 />
                             </Grid>
